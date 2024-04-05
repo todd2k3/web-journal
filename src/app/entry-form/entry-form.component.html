@@ -1,0 +1,18 @@
+<form>
+    <fieldset>
+        <div>
+            <label>Prompt <a>none</a> <a>new</a></label>
+            <input type="text" name="promptValue" />
+        </div>
+        <div><label>Entry Date: {{entryDate}}</label></div>
+        <input type="text" name="entryData" value="{{entryDate}}" hidden="true" />
+        <div>
+            <label>Entry</label>
+            <textarea name="entryText" #entryText></textarea>
+        </div>
+        <div>
+            <button (click)="add(entryText.value)">Save</button>
+            <button>Cancel</button>
+        </div>
+    </fieldset>
+</form>
