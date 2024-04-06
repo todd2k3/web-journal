@@ -1,36 +1,40 @@
 import { Component } from '@angular/core';
-import moment from 'moment';
-import { JournalEntry } from '../journalentry';
+// import moment from 'moment';
+// import { JournalEntry } from '../journalentry';
 import { JournalService } from '../journal.service';
 import { MessageService } from '../message.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './entry-form.component.html',
   styleUrl: './entry-form.component.css'
 })
 export class EntryFormComponent {
-  private moment = moment(new Date)
-  public entryDate = moment.now().toLocaleString('en-US')
-  constructor(private journalService: JournalService, private messageService: MessageService) { }
+  // private moment = moment(new Date)
+  // public entryDate = moment.now().toLocaleString('en-US')
+  entryForm = new FormGroup({
+    topicValue: new FormControl(''),
+    entryDate: new FormControl(''),
+    entry: new FormControl('')
+  });
+  // constructor(private journalService: JournalService, private messageService: MessageService) { }
+  constructor() {}
 
-  add(entry: string): void {
-    entry = entry.trim();
-    if (!entry) { return; }
-    this.journalService.addEntry({ entry } as JournalEntry)
-      .subscribe(entry => {
-        this.messageService.add("Entry Created.");
-        //this.entries.push(entry);
-      });
+  submitEntry() {
+    // entry = entry.trim();
+    let topicValue = this.entryForm.value.topicValue ?? '';
+    let entryDate = this.entryForm.value.entryDate ?? '';
+    let entryContent = this.entryForm.value.entry ?? '';
+    //let entryObj = {id: 1, prompt: topicValue, date: entryDate, entry: entryContent};
+    // if (!entry) { return; }
+    // this.journalService.addEntry({ entryObj } as JournalEntry)
+    //   .subscribe(entry => {
+    //     this.messageService.add("Entry Created.");
+    //     //this.entries.push(entry);
+    //   });
   }
-
-  // function getEntryDate() {
-  //   const date = new Date();
-  //   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-  //   const formatter = new Intl.DateTimeFormat('en-US', options);
-  //   const formattedDateTime = formatter.format(date);
-  //   return formattedDateTime;
-  // }
 }

@@ -1,18 +1,20 @@
-<form>
-    <fieldset>
-        <div>
-            <label>Prompt <a>none</a> <a>new</a></label>
-            <input type="text" name="promptValue" />
-        </div>
-        <div><label>Entry Date: {{entryDate}}</label></div>
-        <input type="text" name="entryData" value="{{entryDate}}" hidden="true" />
-        <div>
-            <label>Entry</label>
-            <textarea name="entryText" #entryText></textarea>
-        </div>
-        <div>
-            <button (click)="add(entryText.value)">Save</button>
-            <button>Cancel</button>
-        </div>
-    </fieldset>
+<section class="entry-creation">
+    <h3>Add your journal entry.</h3>
+<form [formGroup]="entryForm" (submit)="submitEntry">
+    <div>
+    <label for="topicValue">Topic</label>
+    <input id="topicValue" type="text" formControlName="topicValue">
+    </div>
+    <div>
+    <label for="entryDate">Entry Date</label>
+    <input id="entryDate" type="text" value="" formControlName="entryDate">
+    </div>
+    <div>
+    <label for="entry">Entry</label>
+    <textarea id="entry" formControlName="entry"></textarea>
+    </div>
+    <div>
+    <button type="submit">Save</button>
+    </div>
 </form>
+</section>
