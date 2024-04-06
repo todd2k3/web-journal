@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule ],
   templateUrl: './entry-form.component.html',
   styleUrl: './entry-form.component.css'
 })
@@ -22,7 +22,9 @@ export class EntryFormComponent {
     entry: new FormControl('')
   });
   // constructor(private journalService: JournalService, private messageService: MessageService) { }
-  constructor() {}
+  constructor(private messageService: MessageService) {
+    messageService.add("loaded the entry form");
+  }
 
   submitEntry() {
     // entry = entry.trim();
